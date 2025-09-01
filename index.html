@@ -1,0 +1,348 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>pharos_network生态导航</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- 顶部 big tag -->
+    <div id="top-tags" class="container">
+        <div class="big-tag" id="insert-button-okx" >OKX钱包</div>
+
+         <!-- <div class="big-tag" id="insert-button-rari">添加RARI链</div> -->
+
+        <!-- <div class="big-tag" id="switch-button-buy">跨链购买切换</div>
+        <div class="big-tag" id="switch-button-mint">跨链铸造切换</div> -->
+    </div>
+
+    <!-- 所有其他分组容器 -->
+    <div class="container" id="group-tags-container"></div>
+
+    <script>
+    (() => {
+
+        const coins = [
+        "BTC", "ETH", "SOL"
+        ];
+
+        const tagGroups = [
+
+    {
+        title: "官方",
+        tags: [
+            { name: "领取官方水的地址", url: "https://testnet.pharosnetwork.xyz/" },
+            { name: "任务列表", url: "https://testnet.pharosnetwork.xyz/experience" },
+
+        ]
+    },
+    {
+        title: "Swap",
+        tags: [
+            { name: "zenith-swap", url: "https://testnet.zenithswap.xyz/swap" },
+            { name: "faroswap-swap", url: "https://faroswap.xyz/swap" },
+
+        ]
+    },
+    {
+        title: "LP",
+        tags: [
+            { name: "zenith-LP", url: "https://testnet.zenithswap.xyz/pool" },
+            { name: "faroswap-LP", url: "https://faroswap.xyz/pool" }
+        ]
+    },
+    {
+        title: "转账",
+        tags: [
+            { name: "链上-转", url: "https://testnet.pharosnetwork.xyz/experience" },
+            { name: "社交-转", url: "https://pay.primuslabs.xyz/?chain=pharostestnet" }
+        ]
+    },
+    {
+        title: "域名",
+        tags: [
+            { name: "pharosname", url: "https://test.pharosname.com/" }
+        ]
+    },
+    {
+        title: "KYC / 交易",
+        tags: [
+            { name: "spout-kyc", url: "https://www.spout.finance/app/profile?tab=kyc" },
+            { name: "spout-trade", url: "https://www.spout.finance/app/trade" }
+        ]
+    },
+    {
+        title: "工具 / 生态",
+        tags: [
+            { name: "AquaFlux", url: "https://playground.aquaflux.pro/" },
+            { name: "autostaki", url: "https://autostaking.pro/?env=pharos" },
+            { name: "bitverse", url: "https://testnet.bitverse.zone/app/" }
+        ]
+    },
+    {
+        title: "交易所",
+        tags: [
+            { name: "Brokex 领水", url: "https://brokex.trade/faucet" },
+            { name: "Brokex 应用", url: "https://app.brokex.trade/" }
+        ]
+    },
+    {
+        title: "Open-Fi",
+        tags: [
+            { name: "Open-Fi 领取", url: "https://app.open-fi.xyz/faucet" },
+            { name: "Open-Fi 应用", url: "https://app.open-fi.xyz/" }
+        ]
+    },
+    {
+        title: "NFT",
+        tags: [
+            { name: "铸造图片", url: "https://app.grandline.world/launchpad/mint/0x9979b7fedf761c2989642f63ba6ed580dbdfc46f" },
+        ]
+    },
+    {
+        title: "积分查询 / 教程",
+        tags: [
+            { name: "积分查询", url: "https://pharoshub.xyz/" },
+            { name: "教程", url: "https://pharos-3.gitbook.io/pharos/ren-wu-jiao-cheng/pharos-ren-wu-jiao-cheng" }
+        ]
+    },
+    {
+        title: "Discord邀请",
+        tags: [
+            { name: "Pharos-DC", url: "https://discord.com/invite/pharos" },
+            { name: "R2-DC", url: "https://discord.com/invite/r2yield" }
+        ]
+    },
+    {
+        title: "R2",
+        tags: [
+            { name: "R2-领取水", url: "https://discord.com/channels/1308368864505106442/1395349206947987456" },
+            { name: "R2-swap", url: "https://www.r2.money/swap" },
+            { name: "R2-earn", url: "https://www.r2.money/sr2usd" }
+
+        ]
+    }
+];
+        
+
+        const crossChainTagGroups = [
+        {
+            title: "",
+            tags: [
+            { name: "", url: "https://opensea.io/collection/virtual-vanguards-1/overview" },
+            { name: "", url: "https://opensea.io/collection/fantasy-fighters/overview" },
+            { name: "", url: "https://opensea.io/collection/space-shooters-1/overview" },
+            { name: "", url: "https://opensea.io/collection/retro-rumble/overview" },
+            { name: "", url: "https://opensea.io/collection/sports-spectacular/overview" },
+            { name: "", url: "https://opensea.io/collection/fractal-frenzy-2/overview" },
+            { name: "", url: "https://opensea.io/collection/color-chaos-1/overview" },
+            { name: "", url: "https://opensea.io/collection/shape-symphony-1/overview" },
+            { name: "", url: "https://opensea.io/collection/abstract-ascent/overview" },
+            { name: "", url: "https://opensea.io/collection/infinite-illusions-3/overview" },
+            { name: "", url: "https://opensea.io/collection/geometric-glory/overview" },
+            { name: "", url: "https://opensea.io/collection/surreal-sequences/overview" },
+            { name: "", url: "https://opensea.io/collection/conceptual-canvas/overview" },
+            { name: "", url: "https://opensea.io/collection/abstract-allure-5/overview" },
+            { name: "", url: "https://opensea.io/collection/creative-constellations/overview" },
+            { name: "", url: "https://opensea.io/collection/feline-finesse/overview" },
+            { name: "", url: "https://opensea.io/collection/canine-canopy/overview" },
+            { name: "", url: "https://opensea.io/collection/avian-aesthetics/overview" },
+            { name: "", url: "https://opensea.io/collection/reptilian-rhapsody/overview" },
+            { name: "", url: "https://opensea.io/collection/set-up-your-drop/overview" },
+            { name: "", url: "https://opensea.io/collection/pixelpinnacle/overview" },
+            { name: "", url: "https://opensea.io/collection/yberchronicle/overview" },
+            { name: "", url: "https://opensea.io/collection/pixelpioneer-3/overview" },
+            { name: "", url: "https://opensea.io/collection/mysticmint-1/overview" },
+            { name: "", url: "https://opensea.io/collection/etherealecho-3/overview" },
+            { name: "", url: "https://opensea.io/collection/aetherarcane/overview" },
+            { name: "", url: "https://opensea.io/collection/nebulanirvana/overview" },
+            { name: "", url: "https://opensea.io/collection/cyberchronicle/overview" },
+            { name: "", url: "https://opensea.io/collection/xiaohuolong/overview" },
+            { name: "", url: "https://opensea.io/collection/celestialcipher-2/overview" },
+            { name: "", url: "https://opensea.io/collection/quantumcanvas-3/overview" },
+            { name: "", url: "https://opensea.io/collection/digitaldawn-1/overview" },
+            { name: "", url: "https://opensea.io/collection/genesisgems-2/overview" },
+            { name: "", url: "https://opensea.io/collection/quantumquirk/overview" },
+            { name: "", url: "https://opensea.io/collection/aetherartifacts-1/overview" },
+            { name: "", url: "https://opensea.io/collection/pixelpotion-1/overview" },
+            { name: "", url: "https://opensea.io/collection/cyberserenade/overview" },
+            { name: "", url: "https://opensea.io/collection/jienigui-1/overview" },
+            { name: "", url: "https://opensea.io/collection/luminouslabyrinth-2/overview" },
+            { name: "", url: "https://opensea.io/collection/celestialcipher-3/overview" },
+            { name: "", url: "https://opensea.io/collection/block-black-cat/overview" },
+            { name: "", url: "https://opensea.io/collection/etherealessence-4/overview" },
+            { name: "", url: "https://opensea.io/collection/digitaldreamscape-6/overview" },
+            { name: "", url: "https://opensea.io/collection/mysticmosaic-1/overview" },
+            { name: "", url: "https://opensea.io/collection/quantumcanvas-4/overview" },
+            { name: "", url: "https://opensea.io/collection/mysticmuse-2/overview" },
+            { name: "", url: "https://opensea.io/collection/digitaldynamo-4/overview" },
+            { name: "", url: "https://opensea.io/collection/quantumquilt-1/overview" },
+            { name: "", url: "https://opensea.io/collection/etherealechoes-3/overview" }
+            ]
+  } 
+    ];
+
+        // 生成一个随机标签组，title 是随机tag的name，tags里只有这个tag
+        function getRandomTagGroup(tagGroups) {
+            const allTags = tagGroups.flatMap(group => group.tags);
+            if (allTags.length === 0) return { title: '', tags: [] };
+
+            const randomTag = allTags[Math.floor(Math.random() * allTags.length)];
+            return {
+                title: randomTag.name,
+                tags: [randomTag]
+            };
+        }
+
+   
+
+        function createTagElement(tag) {
+            const el = document.createElement('div');
+            el.className = 'tag';
+            el.textContent = tag.name;
+            el.dataset.url = tag.url;
+            el.addEventListener('click', () => {
+                window.open(tag.url, '_blank');
+            });
+            return el;
+        }
+
+        // 通用渲染函数，接收标签组数组参数
+        function renderGroups(groups) {
+            const container = document.getElementById('group-tags-container');
+            container.innerHTML = '';
+
+            groups.forEach(group => {
+                const card = document.createElement('div');
+                card.className = 'group-card';
+
+                const title = document.createElement('div');
+                title.className = 'category-title';
+                title.textContent = group.title || '';  // 防止空title报错
+                card.appendChild(title);
+
+                const tagGroup = document.createElement('div');
+                tagGroup.className = 'tag-group';
+
+                group.tags.forEach(tag => {
+                    tagGroup.appendChild(createTagElement(tag));
+                });
+
+                card.appendChild(tagGroup);
+                container.appendChild(card);
+            });
+        }
+
+
+        function bindBigTagClicks() {
+            document.querySelectorAll('.big-tag').forEach(el => {
+                el.addEventListener('click', () => {
+                    const url = el.dataset.url;
+                    if (url) {
+                        window.open(url, '_blank');
+                    }
+                });
+            });
+        }
+
+                // 随机获取币种字符串函数
+        function getRandomCoin() {
+        const idx = Math.floor(Math.random() * coins.length);
+        return coins[idx];
+        }
+
+
+
+
+
+
+
+        crossChainTagGroups.forEach(group => {
+            group.tags.forEach(tag => {
+                // 提取 URL 中 collection/ 和 /overview 之间的部分作为 name
+                const match = tag.url.match(/collection\/([^\/]+)\//);
+                tag.name = match ? match[1] : '';
+            });
+            });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            bindBigTagClicks();
+
+            // 页面初始渲染默认标签组
+            renderGroups(tagGroups);
+        });
+
+
+
+        document.getElementById("insert-button-rari").addEventListener("click", () => {
+            bindBigTagClicks();
+            // 再执行 MetaMask 相关代码
+            if (typeof window.ethereum === "undefined") {
+            console.error("MetaMask 未检测到，请先安装 MetaMask！");
+            alert("MetaMask 未检测到，请先安装 MetaMask！");
+            } else {
+            addRariChain();
+            }
+        
+
+            async function addRariChain() {
+                try {
+                // 请求连接 MetaMask 钱包
+                await window.ethereum.request({ method: "eth_requestAccounts" });
+
+                // RARI 链的参数
+                const chainParams = {
+                    chainId: "0x52415249", // 十六进制的 1380012617
+                    chainName: "RARI Chain",
+                    nativeCurrency: {
+                    name: "Ethereum",
+                    symbol: "ETH",
+                    decimals: 18,
+                    },
+                    rpcUrls: ["https://mainnet.rpc.rarichain.org/http"],
+                    blockExplorerUrls: ["https://mainnet.explorer.rarichain.org/"],
+                };
+
+                // 添加 RARI 链到 MetaMask
+                await window.ethereum.request({
+                    method: "wallet_addEthereumChain",
+                    params: [chainParams],
+                });
+
+                console.log("✅ RARI Chain 已成功添加到 MetaMask！");
+                } catch (error) {
+                console.error("❌ 添加 RARI Chain 失败:", error.message || error);
+                }
+            }
+
+
+        });
+
+
+        document.getElementById("switch-button-buy").addEventListener("click", () => {
+            bindBigTagClicks();
+            renderGroups(tagGroups);
+
+        });
+
+        document.getElementById("insert-button-okx").addEventListener("click", () => {
+            window.open('chrome-extension://mcohilncbfahbmgdjkbpemcciiolgcge/home.html', '_blank');
+        });
+
+        // 按钮点击切换渲染crossChainTagGroups
+        document.getElementById("switch-button-mint").addEventListener("click", () => {
+            const randomGroup = getRandomTagGroup(crossChainTagGroups);
+            const combinedGroups = [...crossChainTagGroups, randomGroup];
+            renderGroups(combinedGroups);
+
+        });
+
+
+
+    })();
+    </script>
+</body>
+</html>

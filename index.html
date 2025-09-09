@@ -11,7 +11,7 @@
 
     <!-- 顶部 big tag -->
     <div id="top-tags" class="container">
-        <div class="big-tag" id="insert-button-okx" >OKX钱包</div>
+        <div class="big-tag" id="insert-button-okx" >小狐狸钱包</div>
 
          <!-- <div class="big-tag" id="insert-button-rari">添加RARI链</div> -->
 
@@ -36,6 +36,7 @@
         tags: [
             { name: "领取官方水的地址", url: "https://testnet.pharosnetwork.xyz/" },
             { name: "任务列表", url: "https://testnet.pharosnetwork.xyz/experience" },
+            { name: "DC查询", url: "https://discord.com/channels/1270276651636232282/1305150517701246996" },
 
         ]
     },
@@ -277,68 +278,12 @@
 
 
 
-        document.getElementById("insert-button-rari").addEventListener("click", () => {
-            bindBigTagClicks();
-            // 再执行 MetaMask 相关代码
-            if (typeof window.ethereum === "undefined") {
-            console.error("MetaMask 未检测到，请先安装 MetaMask！");
-            alert("MetaMask 未检测到，请先安装 MetaMask！");
-            } else {
-            addRariChain();
-            }
-        
-
-            async function addRariChain() {
-                try {
-                // 请求连接 MetaMask 钱包
-                await window.ethereum.request({ method: "eth_requestAccounts" });
-
-                // RARI 链的参数
-                const chainParams = {
-                    chainId: "0x52415249", // 十六进制的 1380012617
-                    chainName: "RARI Chain",
-                    nativeCurrency: {
-                    name: "Ethereum",
-                    symbol: "ETH",
-                    decimals: 18,
-                    },
-                    rpcUrls: ["https://mainnet.rpc.rarichain.org/http"],
-                    blockExplorerUrls: ["https://mainnet.explorer.rarichain.org/"],
-                };
-
-                // 添加 RARI 链到 MetaMask
-                await window.ethereum.request({
-                    method: "wallet_addEthereumChain",
-                    params: [chainParams],
-                });
-
-                console.log("✅ RARI Chain 已成功添加到 MetaMask！");
-                } catch (error) {
-                console.error("❌ 添加 RARI Chain 失败:", error.message || error);
-                }
-            }
-
-
-        });
-
-
-        document.getElementById("switch-button-buy").addEventListener("click", () => {
-            bindBigTagClicks();
-            renderGroups(tagGroups);
-
-        });
+       
 
         document.getElementById("insert-button-okx").addEventListener("click", () => {
-            window.open('chrome-extension://mcohilncbfahbmgdjkbpemcciiolgcge/home.html', '_blank');
+            window.open('chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html', '_blank');
         });
 
-        // 按钮点击切换渲染crossChainTagGroups
-        document.getElementById("switch-button-mint").addEventListener("click", () => {
-            const randomGroup = getRandomTagGroup(crossChainTagGroups);
-            const combinedGroups = [...crossChainTagGroups, randomGroup];
-            renderGroups(combinedGroups);
-
-        });
 
 
 

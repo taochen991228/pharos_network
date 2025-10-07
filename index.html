@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -11,7 +12,11 @@
     <!-- 顶部 big tag -->
     <div id="top-tags" class="container">
         <div class="big-tag" id="insert-button-okx" >小狐狸钱包</div>
-        <div class="big-tag" id="random-nft-button">随机NFT</div>
+
+         <!-- <div class="big-tag" id="insert-button-rari">添加RARI链</div> -->
+
+        <!-- <div class="big-tag" id="switch-button-buy">跨链购买切换</div>
+        <div class="big-tag" id="switch-button-mint">跨链铸造切换</div> -->
     </div>
 
     <!-- 所有其他分组容器 -->
@@ -20,44 +25,190 @@
     <script>
     (() => {
 
-        const tagGroups = [
-            {
-                title: "NFT",
-                tags: [
-                    { "name": "1-Pharos", "url": "https://app.grandline.world/launchpad/mint/0x1da9f40036bee3fda37ddd9bff624e1125d8991d" },
-                    { "name": "2-FaroSwap", "url": "https://app.grandline.world/launchpad/mint/0x2a469a4073480596b9deb19f52aa89891ccff5ce" },
-                    { "name": "3-Zentra", "url": "https://app.grandline.world/launchpad/mint/0xe71188df7be6321ffd5aaa6e52e6c96375e62793" },
-                    { "name": "4-Gotchipus", "url": "https://app.grandline.world/launchpad/mint/0xb2ac4f09735007562c513ebbe152a8d7fa682bef" },
-                    { "name": "5-Spout", "url": "https://app.grandline.world/launchpad/mint/0x96381ed3fcfb385cbacfe6908159f0905b19767a" },
-                    { "name": "6-AutoStaking", "url": "https://app.grandline.world/launchpad/mint/0x0d00314d006e70ca08ac37c3469b4bf958a7580b" },
-                    { "name": "7-PNS", "url": "https://app.grandline.world/launchpad/mint/0x4af366c7269dc9a0335bd055af979729c20e0f5f" },
-                    { "name": "8-Brokex", "url": "https://app.grandline.world/launchpad/mint/0x9979b7fedf761c2989642f63ba6ed580dbdfc46f" },
-                    { "name": "9-OpenFi", "url": "https://app.grandline.world/launchpad/mint/0x822483f6cf39b7dad66fec5f4feecbfd72172626" },
-                    { "name": "10-MoveFlow", "url": "https://app.grandline.world/launchpad/mint/0xc188e0ad7e39ccd3bdfdc5572e06e5ac08f1a847" },
-                    { "name": "11-Zenith", "url": "https://app.grandline.world/launchpad/mint/0xf4535d0781d973a26b48c617410419ec66b2af1c" }
-                ]
-            }
+        const coins = [
+        "BTC", "ETH", "SOL"
         ];
 
-        function getRandomNFTUrl() {
-            const nftGroup = tagGroups.find(group => group.title === "NFT");
-            if (!nftGroup || nftGroup.tags.length === 0) return null;
-            const randomTag = nftGroup.tags[Math.floor(Math.random() * nftGroup.tags.length)];
-            return randomTag.url;
+        const tagGroups = [
+
+    {
+        title: "官方",
+        tags: [
+            { name: "领取官方水的地址", url: "https://testnet.pharosnetwork.xyz/" },
+            { name: "任务列表", url: "https://testnet.pharosnetwork.xyz/experience" },
+            { name: "DC查询", url: "https://discord.com/channels/1270276651636232282/1305150517701246996" },
+
+        ]
+    },
+    {
+        title: "Swap",
+        tags: [
+            { name: "zenith-swap", url: "https://testnet.zenithswap.xyz/swap" },
+            { name: "faroswap-swap", url: "https://faroswap.xyz/swap" },
+
+        ]
+    },
+    {
+        title: "LP",
+        tags: [
+            { name: "zenith-LP", url: "https://testnet.zenithswap.xyz/pool" },
+            { name: "faroswap-LP", url: "https://faroswap.xyz/pool" }
+        ]
+    },
+    {
+        title: "转账",
+        tags: [
+            { name: "链上-转", url: "https://testnet.pharosnetwork.xyz/experience" },
+            { name: "社交-转", url: "https://pay.primuslabs.xyz/?chain=pharostestnet" }
+        ]
+    },
+    {
+        title: "域名",
+        tags: [
+            { name: "pharosname", url: "https://test.pharosname.com/" }
+        ]
+    },
+    {
+        title: "KYC / 交易",
+        tags: [
+            { name: "spout-kyc", url: "https://www.spout.finance/app/profile?tab=kyc" },
+            { name: "spout-trade", url: "https://www.spout.finance/app/trade" }
+        ]
+    },
+    {
+        title: "工具 / 生态",
+        tags: [
+            { name: "AquaFlux", url: "https://playground.aquaflux.pro/" },
+            { name: "autostaki", url: "https://autostaking.pro/?env=pharos" },
+            { name: "bitverse", url: "https://testnet.bitverse.zone/app/" }
+        ]
+    },
+    {
+        title: "交易所",
+        tags: [
+            { name: "Brokex 领水", url: "https://brokex.trade/faucet" },
+            { name: "Brokex 应用", url: "https://app.brokex.trade/" }
+        ]
+    },
+    {
+        title: "Open-Fi",
+        tags: [
+            { name: "Open-Fi 领取", url: "https://app.open-fi.xyz/faucet" },
+            { name: "Open-Fi 应用", url: "https://app.open-fi.xyz/" }
+        ]
+    },
+    {
+        title: "NFT",
+        tags: [
+            { "name": "1-Pharos", "url": "https://app.grandline.world/launchpad/mint/0x1da9f40036bee3fda37ddd9bff624e1125d8991d" },
+            { "name": "2-FaroSwap", "url": "https://app.grandline.world/launchpad/mint/0x2a469a4073480596b9deb19f52aa89891ccff5ce" },
+            { "name": "3-Zentra", "url": "https://app.grandline.world/launchpad/mint/0xe71188df7be6321ffd5aaa6e52e6c96375e62793" },
+            { "name": "4-Gotchipus", "url": "https://app.grandline.world/launchpad/mint/0xb2ac4f09735007562c513ebbe152a8d7fa682bef" },
+            { "name": "5-Spout", "url": "https://app.grandline.world/launchpad/mint/0x96381ed3fcfb385cbacfe6908159f0905b19767a" },
+            { "name": "6-AutoStaking", "url": "https://app.grandline.world/launchpad/mint/0x0d00314d006e70ca08ac37c3469b4bf958a7580b" },
+            { "name": "7-PNS", "url": "https://app.grandline.world/launchpad/mint/0x4af366c7269dc9a0335bd055af979729c20e0f5f" },
+            { "name": "8-Brokex", "url": "https://app.grandline.world/launchpad/mint/0x9979b7fedf761c2989642f63ba6ed580dbdfc46f" },
+            { "name": "9-OpenFi", "url": "https://app.grandline.world/launchpad/mint/0x822483f6cf39b7dad66fec5f4feecbfd72172626" },
+            { "name": "10-MoveFlow", "url": "https://app.grandline.world/launchpad/mint/0xc188e0ad7e39ccd3bdfdc5572e06e5ac08f1a847" },
+            { "name": "11-Zenith", "url": "https://app.grandline.world/launchpad/mint/0xf4535d0781d973a26b48c617410419ec66b2af1c" }
+        ]
+    },
+    {
+        title: "积分查询 / 教程",
+        tags: [
+            { name: "积分查询", url: "https://pharoshub.xyz/" },
+            { name: "教程", url: "https://pharos-3.gitbook.io/pharos/ren-wu-jiao-cheng/pharos-ren-wu-jiao-cheng" }
+        ]
+    },
+    {
+        title: "Discord邀请",
+        tags: [
+            { name: "Pharos-DC", url: "https://discord.com/invite/pharos" },
+            { name: "R2-DC", url: "https://discord.com/invite/r2yield" }
+        ]
+    },
+    {
+        title: "R2",
+        tags: [
+            { name: "R2-领取水", url: "https://discord.com/channels/1308368864505106442/1395349206947987456" },
+            { name: "R2-swap", url: "https://www.r2.money/swap" },
+            { name: "R2-earn", url: "https://www.r2.money/sr2usd" }
+
+        ]
+    }
+];
+        
+
+        const crossChainTagGroups = [
+        {
+            title: "",
+            tags: [
+            { name: "", url: "https://opensea.io/collection/virtual-vanguards-1/overview" },
+            { name: "", url: "https://opensea.io/collection/fantasy-fighters/overview" },
+            { name: "", url: "https://opensea.io/collection/space-shooters-1/overview" },
+            { name: "", url: "https://opensea.io/collection/retro-rumble/overview" },
+            { name: "", url: "https://opensea.io/collection/sports-spectacular/overview" },
+            { name: "", url: "https://opensea.io/collection/fractal-frenzy-2/overview" },
+            { name: "", url: "https://opensea.io/collection/color-chaos-1/overview" },
+            { name: "", url: "https://opensea.io/collection/shape-symphony-1/overview" },
+            { name: "", url: "https://opensea.io/collection/abstract-ascent/overview" },
+            { name: "", url: "https://opensea.io/collection/infinite-illusions-3/overview" },
+            { name: "", url: "https://opensea.io/collection/geometric-glory/overview" },
+            { name: "", url: "https://opensea.io/collection/surreal-sequences/overview" },
+            { name: "", url: "https://opensea.io/collection/conceptual-canvas/overview" },
+            { name: "", url: "https://opensea.io/collection/abstract-allure-5/overview" },
+            { name: "", url: "https://opensea.io/collection/creative-constellations/overview" },
+            { name: "", url: "https://opensea.io/collection/feline-finesse/overview" },
+            { name: "", url: "https://opensea.io/collection/canine-canopy/overview" },
+            { name: "", url: "https://opensea.io/collection/avian-aesthetics/overview" },
+            { name: "", url: "https://opensea.io/collection/reptilian-rhapsody/overview" },
+            { name: "", url: "https://opensea.io/collection/set-up-your-drop/overview" },
+            { name: "", url: "https://opensea.io/collection/pixelpinnacle/overview" },
+            { name: "", url: "https://opensea.io/collection/yberchronicle/overview" },
+            { name: "", url: "https://opensea.io/collection/pixelpioneer-3/overview" },
+            { name: "", url: "https://opensea.io/collection/mysticmint-1/overview" },
+            { name: "", url: "https://opensea.io/collection/etherealecho-3/overview" },
+            { name: "", url: "https://opensea.io/collection/aetherarcane/overview" },
+            { name: "", url: "https://opensea.io/collection/nebulanirvana/overview" },
+            { name: "", url: "https://opensea.io/collection/cyberchronicle/overview" },
+            { name: "", url: "https://opensea.io/collection/xiaohuolong/overview" },
+            { name: "", url: "https://opensea.io/collection/celestialcipher-2/overview" },
+            { name: "", url: "https://opensea.io/collection/quantumcanvas-3/overview" },
+            { name: "", url: "https://opensea.io/collection/digitaldawn-1/overview" },
+            { name: "", url: "https://opensea.io/collection/genesisgems-2/overview" },
+            { name: "", url: "https://opensea.io/collection/quantumquirk/overview" },
+            { name: "", url: "https://opensea.io/collection/aetherartifacts-1/overview" },
+            { name: "", url: "https://opensea.io/collection/pixelpotion-1/overview" },
+            { name: "", url: "https://opensea.io/collection/cyberserenade/overview" },
+            { name: "", url: "https://opensea.io/collection/jienigui-1/overview" },
+            { name: "", url: "https://opensea.io/collection/luminouslabyrinth-2/overview" },
+            { name: "", url: "https://opensea.io/collection/celestialcipher-3/overview" },
+            { name: "", url: "https://opensea.io/collection/block-black-cat/overview" },
+            { name: "", url: "https://opensea.io/collection/etherealessence-4/overview" },
+            { name: "", url: "https://opensea.io/collection/digitaldreamscape-6/overview" },
+            { name: "", url: "https://opensea.io/collection/mysticmosaic-1/overview" },
+            { name: "", url: "https://opensea.io/collection/quantumcanvas-4/overview" },
+            { name: "", url: "https://opensea.io/collection/mysticmuse-2/overview" },
+            { name: "", url: "https://opensea.io/collection/digitaldynamo-4/overview" },
+            { name: "", url: "https://opensea.io/collection/quantumquilt-1/overview" },
+            { name: "", url: "https://opensea.io/collection/etherealechoes-3/overview" }
+            ]
+  } 
+    ];
+
+        // 生成一个随机标签组，title 是随机tag的name，tags里只有这个tag
+        function getRandomTagGroup(tagGroups) {
+            const allTags = tagGroups.flatMap(group => group.tags);
+            if (allTags.length === 0) return { title: '', tags: [] };
+
+            const randomTag = allTags[Math.floor(Math.random() * allTags.length)];
+            return {
+                title: randomTag.name,
+                tags: [randomTag]
+            };
         }
 
-        document.getElementById("random-nft-button").addEventListener("click", () => {
-            const url = getRandomNFTUrl();
-            if (url) {
-                window.open(url, '_blank');
-            } else {
-                alert("没有可用的NFT链接");
-            }
-        });
-
-        window.addEventListener('DOMContentLoaded', () => {
-            renderGroups(tagGroups);
-        });
+   
 
         function createTagElement(tag) {
             const el = document.createElement('div');
@@ -70,6 +221,7 @@
             return el;
         }
 
+        // 通用渲染函数，接收标签组数组参数
         function renderGroups(groups) {
             const container = document.getElementById('group-tags-container');
             container.innerHTML = '';
@@ -80,7 +232,7 @@
 
                 const title = document.createElement('div');
                 title.className = 'category-title';
-                title.textContent = group.title || '';
+                title.textContent = group.title || '';  // 防止空title报错
                 card.appendChild(title);
 
                 const tagGroup = document.createElement('div');
@@ -94,6 +246,79 @@
                 container.appendChild(card);
             });
         }
+
+
+        function bindBigTagClicks() {
+            document.querySelectorAll('.big-tag').forEach(el => {
+                el.addEventListener('click', () => {
+                    const url = el.dataset.url;
+                    if (url) {
+                        window.open(url, '_blank');
+                    }
+                });
+            });
+        }
+
+                // 随机获取币种字符串函数
+        function getRandomCoin() {
+            const idx = Math.floor(Math.random() * coins.length);
+            return coins[idx];
+            }
+
+            // 随机跳转 NFT 链接功能
+        function getRandomNFTUrl() {
+            const nftGroup = tagGroups.find(group => group.title === "NFT");
+            if (!nftGroup || nftGroup.tags.length === 0) return null;
+            const randomTag = nftGroup.tags[Math.floor(Math.random() * nftGroup.tags.length)];
+            return randomTag.url;
+        }
+
+        // 生成一个新的按钮
+        const randomBtn = document.createElement("div");
+        randomBtn.className = "big-tag";
+        randomBtn.textContent = "随机NFT";
+        randomBtn.addEventListener("click", () => {
+            const url = getRandomNFTUrl();
+            if (url) {
+                window.open(url, "_blank");
+            } else {
+                alert("没有可用的NFT链接");
+            }
+        });
+
+        // 把按钮插入到顶部容器
+        document.getElementById("top-tags").appendChild(randomBtn);
+
+
+
+
+
+
+        crossChainTagGroups.forEach(group => {
+            group.tags.forEach(tag => {
+                // 提取 URL 中 collection/ 和 /overview 之间的部分作为 name
+                const match = tag.url.match(/collection\/([^\/]+)\//);
+                tag.name = match ? match[1] : '';
+            });
+            });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            bindBigTagClicks();
+
+            // 页面初始渲染默认标签组
+            renderGroups(tagGroups);
+        });
+
+
+
+       
+
+        document.getElementById("insert-button-okx").addEventListener("click", () => {
+            window.open('chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html', '_blank');
+        });
+
+
+
 
     })();
     </script>
